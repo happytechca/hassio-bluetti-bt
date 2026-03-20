@@ -116,7 +116,7 @@
       "ctrl_led_mode": {
         "name": "LED Mode"
       },
-       "ctrl_ups_mode": {
+      "ctrl_ups_mode": {
         "name": "UPS Mode"
       },
       "dc_input_current": {
@@ -297,6 +297,9 @@
       },
       "ctrl_power_off": {
         "name": "Poweroff"
+      },
+      "ctrl_charge_from_grid": {
+        "name": "Charge from Grid"
       }
     },
     "select": {
@@ -318,16 +321,19 @@
       "ctrl_led_mode": {
         "name": "LED Mode"
       },
-       "ctrl_ups_mode": {
+      "ctrl_ups_mode": {
         "name": "UPS Mode"
+      },
+      "ctrl_working_mode": {
+        "name": "Working Mode"
       }
     },
     "number": {
       "soc_range_end": {
-        "name": "SOC High"
+        "name": "SOC Max"
       },
       "soc_range_start": {
-        "name": "SOC Low"
+        "name": "SOC Min"
       }
     },
     "binary_sensor": {
