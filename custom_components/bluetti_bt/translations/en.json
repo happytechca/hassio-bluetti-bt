@@ -89,12 +89,6 @@
       "total_battery_percent": {
         "name": "Battery SOC"
       },
-      "soc_range_end": {
-        "name": "SOC high"
-      },
-      "soc_range_start": {
-        "name": "SOC low"
-      },
       "ctrl_eco_min_power_ac": {
         "name": "Eco Minimum Power AC"
       },
@@ -326,6 +320,14 @@
       },
        "ctrl_ups_mode": {
         "name": "UPS Mode"
+      }
+    },
+    "number": {
+      "soc_range_end": {
+        "name": "SOC High"
+      },
+      "soc_range_start": {
+        "name": "SOC Low"
       }
     },
     "binary_sensor": {
