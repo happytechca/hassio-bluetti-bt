@@ -312,7 +312,13 @@
         }
       },
       "ctrl_display_timeout": {
-        "name": "Display Timeout"
+        "name": "Display Timeout",
+        "state": {
+          "SEC30": "30 seconds",
+          "MIN1": "1 minute",
+          "MIN5": "5 minutes",
+          "NEVER": "Never"
+        }
       },
       "ctrl_eco_time_mode": {
         "name": "Eco Timer"
