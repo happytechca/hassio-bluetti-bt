@@ -47,6 +47,8 @@ async def async_setup_entry(
     sensors_to_add = []
     sensor_fields = bluetti_device.get_sensor_fields()
 
+    if config.use_encryption:
+        sensor_fields = sensor_fields + bluetti_device.get_select_fields()
 
     for field in sensor_fields:
         field_name = FieldName(field.name)
@@ -57,7 +59,7 @@ async def async_setup_entry(
         unit = get_unit(field_name)
         device_class = get_device_class(field_name)
         state_class = get_state_class(field_name)
-        category = get_category(field_name)
+        category = None if config.use_encryption else get_category(field_name)
 
         if unit is not None:
             sensors_to_add.append(
