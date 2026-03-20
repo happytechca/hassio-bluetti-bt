@@ -44,10 +44,6 @@ async def async_setup_entry(
         f"{__name__}.{mac_loggable(config.address).replace(':', '_')}"
     )
 
-    if config.use_encryption is True:
-        logger.info("Controls are disabled on encrypted devices")
-        return None
-
     if config is None or not isinstance(coordinator, PollingCoordinator):
         logger.error("No coordinator found")
         return None
@@ -72,6 +68,7 @@ async def async_setup_entry(
                 device_info,
                 field,
                 lock,
+                use_encryption=config.use_encryption,
                 category=category,
                 logger=logger,
             )
@@ -91,6 +88,7 @@ class BluettiSwitch(CoordinatorEntity, SwitchEntity):
         device_info: DeviceInfo,
         field: DeviceField,
         lock: asyncio.Lock,
+        use_encryption: bool = False,
         category: EntityCategory | None = None,
         logger: logging.Logger = logging.getLogger(),
     ):
@@ -106,6 +104,7 @@ class BluettiSwitch(CoordinatorEntity, SwitchEntity):
         self._response_key = field.name
         self._unavailable_counter = 5
         self._lock = lock
+        self._use_encryption = use_encryption
 
         self._attr_has_entity_name = True
         self._attr_device_info = device_info
@@ -198,29 +197,29 @@ class BluettiSwitch(CoordinatorEntity, SwitchEntity):
         """Write to device."""
 
         try:
-            device = await BleakScanner.find_device_by_address(self._address, timeout=5)
+            if self._use_encryption:
+                await self.coordinator.reader.write(self._field.name, state)
+            else:
+                device = await BleakScanner.find_device_by_address(self._address, timeout=5)
 
-            if device is None:
-                return
+                if device is None:
+                    return
 
-            client = await establish_connection(
-                BleakClientWithServiceCache,
-                device,
-                device.name or "Unknown Device",
-                max_attempts=10,
-            )
+                client = await establish_connection(
+                    BleakClientWithServiceCache,
+                    device,
+                    device.name or "Unknown Device",
+                    max_attempts=10,
+                )
 
-            if not client.is_connected:
-                return
+                if not client.is_connected:
+                    return
 
-            writer = DeviceWriter(client, self._bluetti_device, lock=self._lock)
+                writer = DeviceWriter(client, self._bluetti_device, lock=self._lock)
 
-            async with async_timeout.timeout(15):
-                # Send command
-                await writer.write(self._field.name, state)
-
-                # Wait until device has changed value, otherwise reading register might reset it
-                await asyncio.sleep(5)
+                async with async_timeout.timeout(15):
+                    await writer.write(self._field.name, state)
+                    await asyncio.sleep(5)
 
         except TimeoutError:
             self._logger.error("Timed out for device %s", mac_loggable(self._address))
