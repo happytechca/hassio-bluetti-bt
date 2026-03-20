@@ -23,6 +23,7 @@ from bluetti_bt_lib import (
     DeviceField,
     FieldName,
 )
+from bluetti_bt_lib.enums import WorkingMode
 
 from .types import FullDeviceConfig, get_category
 from . import device_info as dev_info, get_unique_id
@@ -160,6 +161,13 @@ class BluettiSwitch(CoordinatorEntity, SwitchEntity):
             )
             self._set_unavailable("Invalid data")
             return
+
+        # Charge from grid is only meaningful in Custom working mode
+        if self._field.name == FieldName.CTRL_CHARGE_FROM_GRID.value:
+            working_mode = self.coordinator.data.get(FieldName.CTRL_WORKING_MODE.value)
+            if working_mode is not WorkingMode.CUSTOM:
+                self._set_unavailable("Only available in Custom working mode")
+                return
 
         response_data = self.coordinator.data.get(self._response_key)
         if response_data is None:

@@ -13,7 +13,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from bluetti_bt_lib import build_device, BluettiDevice, DeviceWriter, NumberField
+from bluetti_bt_lib import build_device, BluettiDevice, DeviceWriter, NumberField, FieldName
 
 from .types import FullDeviceConfig
 from . import device_info as dev_info, get_unique_id
@@ -153,6 +153,19 @@ class BluettiNumber(CoordinatorEntity, NumberEntity):
 
     async def async_set_native_value(self, value: float) -> None:
         """Set new value."""
+        # Guard: SOC min must be less than SOC max
+        data = self.coordinator.data or {}
+        if self._field.name == FieldName.BATTERY_SOC_RANGE_START.value:
+            soc_max = data.get(FieldName.BATTERY_SOC_RANGE_END.value)
+            if soc_max is not None and value >= soc_max:
+                self._logger.warning("SOC Min (%s) must be less than SOC Max (%s)", value, soc_max)
+                return
+        elif self._field.name == FieldName.BATTERY_SOC_RANGE_END.value:
+            soc_min = data.get(FieldName.BATTERY_SOC_RANGE_START.value)
+            if soc_min is not None and value <= soc_min:
+                self._logger.warning("SOC Max (%s) must be greater than SOC Min (%s)", value, soc_min)
+                return
+
         self._logger.debug(
             "Set %s on %s to %s", self._response_key, mac_loggable(self._address), value
         )

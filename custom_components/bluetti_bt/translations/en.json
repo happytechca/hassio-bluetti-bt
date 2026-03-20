@@ -325,7 +325,13 @@
         "name": "UPS Mode"
       },
       "ctrl_working_mode": {
-        "name": "Working Mode"
+        "name": "Working Mode",
+        "state": {
+          "CUSTOM": "Custom",
+          "SELF_CONSUMPTION": "Self Consumption",
+          "BACKUP": "Backup",
+          "TIME_OF_USE": "Time of Use"
+        }
       }
     },
     "number": {
