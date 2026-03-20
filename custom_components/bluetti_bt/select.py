@@ -39,10 +39,6 @@ async def async_setup_entry(
         f"{__name__}.{mac_loggable(config.address).replace(':', '_')}"
     )
 
-    if config.use_encryption is True:
-        logger.info("Controls are disabled on encrypted devices")
-        return None
-
     if config is None or not isinstance(coordinator, PollingCoordinator):
         logger.error("No coordinator found")
         return None
