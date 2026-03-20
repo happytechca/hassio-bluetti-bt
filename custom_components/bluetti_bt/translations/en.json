@@ -304,7 +304,12 @@
     },
     "select": {
       "ctrl_charging_mode": {
-        "name": "Charging Mode"
+        "name": "Charging Mode",
+        "state": {
+          "STANDARD": "Standard",
+          "SILENT": "Silent",
+          "TURBO": "Turbo"
+        }
       },
       "ctrl_display_timeout": {
         "name": "Display Timeout"
