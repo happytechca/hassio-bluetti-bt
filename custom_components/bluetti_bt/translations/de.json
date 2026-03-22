@@ -303,6 +303,17 @@
       },
       "ctrl_power_off": {
         "name": "Ausschalter"
+      },
+      "ctrl_charge_from_grid": {
+        "name": "Vom Netz laden"
+      }
+    },
+    "number": {
+      "soc_range_start": {
+        "name": "SOC Bereich Start"
+      },
+      "soc_range_end": {
+        "name": "SOC Bereich Ende"
       }
     },
     "select": {
@@ -326,6 +337,9 @@
       },
       "ctrl_ups_mode": {
         "name": "UPS Modus"
+      },
+      "ctrl_working_mode": {
+        "name": "Betriebsmodus"
       }
     },
     "binary_sensor": {

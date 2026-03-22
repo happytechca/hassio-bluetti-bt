@@ -212,6 +212,28 @@
       },
       "ctrl_power_off": {
         "name": "Poweroff"
+      },
+      "ctrl_charge_from_grid": {
+        "name": "Carregar da Rede"
+      }
+    },
+    "number": {
+      "soc_range_start": {
+        "name": "SOC Range Start"
+      },
+      "soc_range_end": {
+        "name": "SOC Range End"
+      }
+    },
+    "select": {
+      "ctrl_charging_mode": {
+        "name": "Charging Mode"
+      },
+      "ctrl_display_timeout": {
+        "name": "Display Timeout"
+      },
+      "ctrl_working_mode": {
+        "name": "Working Mode"
       }
     }
   }

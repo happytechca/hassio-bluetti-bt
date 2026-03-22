@@ -303,6 +303,17 @@
       },
       "ctrl_power_off": {
         "name": "Poweroff"
+      },
+      "ctrl_charge_from_grid": {
+        "name": "Charge from Grid"
+      }
+    },
+    "number": {
+      "soc_range_start": {
+        "name": "SOC Range Start"
+      },
+      "soc_range_end": {
+        "name": "SOC Range End"
       }
     },
     "select": {
@@ -326,6 +337,9 @@
       },
        "ctrl_ups_mode": {
         "name": "UPS Mode"
+      },
+      "ctrl_working_mode": {
+        "name": "Working Mode"
       }
     },
     "binary_sensor": {
