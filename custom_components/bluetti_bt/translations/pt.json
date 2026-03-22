@@ -219,21 +219,38 @@
     },
     "number": {
       "soc_range_start": {
-        "name": "SOC Range Start"
+        "name": "SOC Min"
       },
       "soc_range_end": {
-        "name": "SOC Range End"
+        "name": "SOC Max"
       }
     },
     "select": {
       "ctrl_charging_mode": {
-        "name": "Charging Mode"
+        "name": "Modo de Carregamento",
+        "state": {
+          "STANDARD": "Standard",
+          "SILENT": "Silencioso",
+          "TURBO": "Turbo"
+        }
       },
       "ctrl_display_timeout": {
-        "name": "Display Timeout"
+        "name": "Display Timeout",
+        "state": {
+          "SEC30": "30 segundos",
+          "MIN1": "1 minuto",
+          "MIN5": "5 minutos",
+          "NEVER": "Nunca"
+        }
       },
       "ctrl_working_mode": {
-        "name": "Working Mode"
+        "name": "Modo de Operação",
+        "state": {
+          "CUSTOM": "Personalizado",
+          "SELF_CONSUMPTION": "Autoconsumo",
+          "BACKUP": "Backup",
+          "TIME_OF_USE": "Horário"
+        }
       }
     }
   }

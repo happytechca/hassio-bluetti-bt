@@ -89,12 +89,6 @@
       "total_battery_percent": {
         "name": "Batterie Ladestand"
       },
-      "soc_range_end": {
-        "name": "SOC hoch"
-      },
-      "soc_range_start": {
-        "name": "SOC niedrig"
-      },
       "ctrl_eco_min_power_ac": {
         "name": "Eco Minimum Power AC"
       },
@@ -103,12 +97,6 @@
       },
       "ctrl_split_phase_mode": {
         "name": "Split Phase Modus"
-      },
-      "ctrl_charging_mode": {
-        "name": "Lademodus"
-      },
-      "ctrl_display_timeout": {
-        "name": "Display Timeout"
       },
       "ctrl_eco_time_mode": {
         "name": "Eco Timer"
@@ -310,18 +298,29 @@
     },
     "number": {
       "soc_range_start": {
-        "name": "SOC Bereich Start"
+        "name": "SOC Min"
       },
       "soc_range_end": {
-        "name": "SOC Bereich Ende"
+        "name": "SOC Max"
       }
     },
     "select": {
       "ctrl_charging_mode": {
-        "name": "Lademodus"
+        "name": "Lademodus",
+        "state": {
+          "STANDARD": "Standard",
+          "SILENT": "Leise",
+          "TURBO": "Turbo"
+        }
       },
       "ctrl_display_timeout": {
-        "name": "Display Timeout"
+        "name": "Display Timeout",
+        "state": {
+          "SEC30": "30 Sekunden",
+          "MIN1": "1 Minute",
+          "MIN5": "5 Minuten",
+          "NEVER": "Nie"
+        }
       },
       "ctrl_eco_time_mode": {
         "name": "Eco Timer"
@@ -339,7 +338,13 @@
         "name": "UPS Modus"
       },
       "ctrl_working_mode": {
-        "name": "Betriebsmodus"
+        "name": "Betriebsmodus",
+        "state": {
+          "CUSTOM": "Benutzerdefiniert",
+          "SELF_CONSUMPTION": "Eigenverbrauch",
+          "BACKUP": "Backup",
+          "TIME_OF_USE": "Zeitbasiert"
+        }
       }
     },
     "binary_sensor": {
